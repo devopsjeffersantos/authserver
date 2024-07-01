@@ -4,4 +4,31 @@ server:
 logging:
   level:
     org.springframework.security: TRACE
-            
+
+spring:
+  sql:
+    init:
+      mode: always
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/authorization_server}
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:teste123}
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update  # Use 'update' to automatically update schema (create or update tables)
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC  # Set JDBC time zone to UTC (optional, adjust as needed)
+    show-sql: false  # Enable SQL logging (optional, for debugging)
+    generate-ddl: false  # Generate DDL from entity models (optional, for schema creation)
+    open-in-view: false  # Disable Open Session in View (OSIV) to prevent lazy loading issues
+
+sonar:
+  projectKey: authserver
+  projectName: authserver
+  host:
+    url: http://localhost:9090
+  token: sqp_c0595793222ad7bd036bfe40588881e91f5379d9
